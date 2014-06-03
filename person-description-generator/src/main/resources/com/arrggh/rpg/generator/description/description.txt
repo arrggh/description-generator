@@ -1,0 +1,17 @@
+Person Description Generator (${build.number})
+
+Thanks for download this little program of mine. This is a utility I wrote to
+quickly generate descriptions and physical characteristics for either PCs or
+NPCs for roleplaying.
+
+Currently I have the information for the core races of:
+* Shadowrun 3.0
+* Dungeons & Dragons 3/3.5.
+
+If you want me to add more please email the info or upload the changes to
+github and create a pull request.
+
+Please let me know if you find any bugs or have suggestions to make it
+better, just email me. 
+
+E-mail: coder(%)arrggh.com [replace the % with an @]
