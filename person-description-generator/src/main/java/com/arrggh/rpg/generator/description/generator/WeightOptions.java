@@ -1,6 +1,7 @@
 package com.arrggh.rpg.generator.description.generator;
 
-import java.util.Random;
+import java.util.HashSet;
+import java.util.Set;
 
 public enum WeightOptions {
     Random("Random", -4, 4),
@@ -11,45 +12,56 @@ public enum WeightOptions {
     Heavy("Heavy", 1, 2),
     VeryHeavy("Very Heavy", 2, 3),
     ExtremelyHeavy("Extremely Heavy", 3, 4);
-
-    private static final Random random = new Random();
-
-    private final String text;
-    private final int minStdDev;
-    private final int maxStdDev;
-
+    
+    private static Set<WeightOptions> NonRandomOptions = new HashSet<>();
+    static {
+        NonRandomOptions.add(ExtremelyLight);
+        NonRandomOptions.add(VeryLight);
+        NonRandomOptions.add(Light);
+        NonRandomOptions.add(Average);
+        NonRandomOptions.add(Heavy);
+        NonRandomOptions.add(VeryHeavy);
+        NonRandomOptions.add(ExtremelyHeavy);
+    }
+    
+    private static String[] WeightTexts = new String[] {ExtremelyLight.getText(),
+                                                        VeryLight.getText(),
+                                                        Light.getText(),
+                                                        Average.getText(),
+                                                        Heavy.getText(),
+                                                        VeryHeavy.getText(),
+                                                        ExtremelyHeavy.getText()};
+    
+    private String text;
+    private int minStdDev;
+    private int maxStdDev;
+    
     private WeightOptions(String text, int minStdDev, int maxStdDev) {
         this.text = text;
         this.minStdDev = minStdDev;
         this.maxStdDev = maxStdDev;
     }
-
+    
     public String getText() {
         return text;
     }
-
+    
     public int getMinStdDev() {
         return minStdDev;
     }
-
+    
     public int getMaxStdDev() {
         return maxStdDev;
     }
     
     public static String[] getWeights() {
-        final WeightOptions[] values = values();
-        final int lengths = values.length;
-        final String[] results = new String[lengths];
-        for (int i = 0; i != lengths; i++) {
-            results[i] = values[i].getText();
-        }
-        return results;
+        return WeightTexts;
     }
-
-    public static WeightOptions getRandom() {
-        return values()[random.nextInt(values().length - 1) + 1];
+    
+    public static Set<WeightOptions> getNonRandomValues() {
+        return NonRandomOptions;
     }
-
+    
     public static WeightOptions getWeight(String selectedWeight) {
         for (final WeightOptions weight : values()) {
             if (weight.getText().equals(selectedWeight)) {

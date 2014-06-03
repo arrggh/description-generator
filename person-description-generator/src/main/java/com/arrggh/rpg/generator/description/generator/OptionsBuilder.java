@@ -1,6 +1,5 @@
 package com.arrggh.rpg.generator.description.generator;
 
-
 public class OptionsBuilder {
     private String system;
     private String race;
@@ -45,22 +44,12 @@ public class OptionsBuilder {
     }
 
     public OptionsBuilder height(HeightOptions height) {
-        if (height == HeightOptions.Random) {
-            this.height = HeightOptions.getRandom();
-        }
-        else {
-            this.height = height;
-        }
+        this.height = height;
         return this;
     }
 
     public OptionsBuilder weight(WeightOptions weight) {
-        if (weight == WeightOptions.Random) {
-            this.weight = WeightOptions.getRandom();
-        }
-        else {
-            this.weight = weight;
-        }
+        this.weight = weight;
         return this;
     }
 

@@ -42,7 +42,7 @@ public class DungeonsAndDragons3 {
 
         Map<String, SystemRaceSexEntry> gnomes = new HashMap<>();
         gnomes.put("Male", new SystemRaceSexEntry(104.1, 2.5, 20.5, 0.5, GenericHairColors, GenericEyeColors, GenericSkinColors));
-        dwarfs.put("Female", new SystemRaceSexEntry(99.1, 2.5, 18.2, 0.5, GenericHairColors, GenericEyeColors, GenericSkinColors));
+        gnomes.put("Female", new SystemRaceSexEntry(99.1, 2.5, 18.2, 0.5, GenericHairColors, GenericEyeColors, GenericSkinColors));
         races.put("Gnome", gnomes);
 
         Map<String, SystemRaceSexEntry> halfElfs = new HashMap<>();

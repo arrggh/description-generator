@@ -35,30 +35,52 @@ public class PersonGenerator {
         eyeColor = randomiseIfNeeded(eyeColor, entry.getEyeColors());
         skinColor = randomiseIfNeeded(skinColor, entry.getSkinColors());
         
-        int hMin = options.getHeight().getMinStdDev();
-        int hMax = options.getHeight().getMaxStdDev();
+        HeightOptions heightOptions = options.getHeight();
+        WeightOptions weightOptions = options.getWeight();
         
-        int wMin = options.getWeight().getMinStdDev();
-        int wMax = options.getWeight().getMaxStdDev();
+        heightOptions = randomiseIfNeeded(heightOptions, HeightOptions.getNonRandomValues());
+        weightOptions = randomiseIfNeeded(weightOptions, WeightOptions.getNonRandomValues());
+        
+        int hMin = heightOptions.getMinStdDev();
+        int hMax = heightOptions.getMaxStdDev();
+        
+        int wMin = weightOptions.getMinStdDev();
+        int wMax = weightOptions.getMaxStdDev();
         
         double height = entry.getHeightAverage() + generateStdDev(hMin, hMax) * entry.getHeightStdDev();
         double weight = entry.getWeightAverage() + generateStdDev(wMin, wMax) * entry.getWeightStdDev();
         
+        weight = heightOptions.getWeightModifier() * weight;
+
         return new Person(system,
                           race,
                           sex,
                           height,
-                          options.getHeight().getText(),
+                          heightOptions.getText(),
                           weight,
-                          options.getWeight().getText(),
+                          weightOptions.getText(),
                           hairColor,
                           eyeColor,
                           skinColor);
     }
     
-    private String randomiseIfNeeded(String value, Set<String> values) {
+    private static String randomiseIfNeeded(String value, Set<String> values) {
         if (value.equals(Constants.Random)) {
-            return values.toArray(Constants.EmptyArray)[random.nextInt(values.size())];
+            return values.toArray(new String[0])[random.nextInt(values.size())];
+        }
+        return value;
+    }
+    
+    private static HeightOptions randomiseIfNeeded(HeightOptions value, Set<HeightOptions> values) {
+        if (value.equals(HeightOptions.Random)) {
+            return values.toArray(new HeightOptions[0])[random.nextInt(values.size())];
+        }
+        return value;
+    }
+    
+    private static WeightOptions randomiseIfNeeded(WeightOptions value, Set<WeightOptions> values) {
+        if (value.equals(WeightOptions.Random)) {
+            return values.toArray(new WeightOptions[0])[random.nextInt(values.size())];
         }
         return value;
     }

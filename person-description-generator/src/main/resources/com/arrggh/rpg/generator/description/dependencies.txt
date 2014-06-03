@@ -1,0 +1,4 @@
+This program uses the following libraries (in no particular order):
+
+MigLayout (www.miglayout.com) - 4.2
+    © 2011 MiG InfoCom AB
